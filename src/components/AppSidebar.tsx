@@ -119,34 +119,67 @@ export default function AppSidebar() {
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <SidebarMenu>
-                      <SidebarMenuItem className="ml-3">
-                        <SidebarMenuButton asChild>
-                          <Link href="/meetings/addMeeting">
-                            <PlusCircle />
-                            Add Meeting
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
+                      {state === "expanded" ? (
+                        <SidebarMenuItem className="ml-3">
+                          <SidebarMenuButton asChild>
+                            <Link href="/meetings/addMeeting">
+                              <PlusCircle />
+                              Add Meeting
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      ) : (
+                        <SidebarMenuItem>
+                          <SidebarMenuButton asChild>
+                            <Link href="/meetings/addMeeting">
+                              <PlusCircle />
+                              Add Meeting
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      )}
                     </SidebarMenu>
                     <SidebarMenu>
-                      <SidebarMenuItem className="ml-3">
-                        <SidebarMenuButton asChild>
-                          <Link href="/meetings">
-                            <Calendar1 />
-                            List Meeting
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
+                      {state === "expanded" ? (
+                        <SidebarMenuItem className="ml-3">
+                          <SidebarMenuButton asChild>
+                            <Link href="/meetings">
+                              <Calendar1 />
+                              List Meeting
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      ) : (
+                        <SidebarMenuItem>
+                          <SidebarMenuButton asChild>
+                            <Link href="/meetings">
+                              <Calendar1 />
+                              List Meeting
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      )}
                     </SidebarMenu>
                     <SidebarMenu>
-                      <SidebarMenuItem className="ml-3">
-                        <SidebarMenuButton asChild>
-                          <Link href="/meetings/scheduler">
-                            <CalendarDays />
-                            Meeting Calendar
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
+                      {state === "expanded" ? (
+                        <SidebarMenuItem className="ml-3">
+                          <SidebarMenuButton asChild>
+                            <Link href="/meetings/scheduler">
+                              <CalendarDays />
+                              Meeting Calendar
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      ) : (
+                        <SidebarMenuItem>
+                          <SidebarMenuButton asChild>
+                            <Link href="/meetings/scheduler">
+                              <CalendarDays />
+                              Meeting Calendar
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      )}
                     </SidebarMenu>
                   </CollapsibleContent>
                 </SidebarMenuItem>
