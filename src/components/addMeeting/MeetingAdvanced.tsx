@@ -11,10 +11,11 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Settings } from "lucide-react";
+import type { FormData } from "@/types/meeting";
 
 interface MeetingAdvancedProps {
-  formData: any;
-  setFormData: (data: any) => void;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   errors: { [key: string]: string };
   showAdvanced: boolean;
   setShowAdvanced: (open: boolean) => void;
@@ -47,7 +48,7 @@ const MeetingAdvanced: React.FC<MeetingAdvancedProps> = ({
                   id="isPrivate"
                   checked={formData.isPrivate}
                   onCheckedChange={(checked) =>
-                    setFormData({ ...formData, isPrivate: checked })
+                    setFormData({ ...formData, isPrivate: Boolean(checked) })
                   }
                 />
                 <Label htmlFor="isPrivate">Meeting Pribadi</Label>
@@ -57,7 +58,10 @@ const MeetingAdvanced: React.FC<MeetingAdvancedProps> = ({
                   id="allowRecording"
                   checked={formData.allowRecording}
                   onCheckedChange={(checked) =>
-                    setFormData({ ...formData, allowRecording: checked })
+                    setFormData({
+                      ...formData,
+                      allowRecording: Boolean(checked),
+                    })
                   }
                 />
                 <Label htmlFor="allowRecording">Izinkan Recording</Label>
@@ -67,7 +71,7 @@ const MeetingAdvanced: React.FC<MeetingAdvancedProps> = ({
                   id="waitingRoom"
                   checked={formData.waitingRoom}
                   onCheckedChange={(checked) =>
-                    setFormData({ ...formData, waitingRoom: checked })
+                    setFormData({ ...formData, waitingRoom: Boolean(checked) })
                   }
                 />
                 <Label htmlFor="waitingRoom">Aktifkan Waiting Room</Label>
@@ -79,7 +83,10 @@ const MeetingAdvanced: React.FC<MeetingAdvancedProps> = ({
                   id="requirePassword"
                   checked={formData.requirePassword}
                   onCheckedChange={(checked) =>
-                    setFormData({ ...formData, requirePassword: checked })
+                    setFormData({
+                      ...formData,
+                      requirePassword: Boolean(checked),
+                    })
                   }
                 />
                 <Label htmlFor="requirePassword">Butuh Password</Label>

@@ -13,18 +13,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { meetingTypes, priorityLevels } from "@/lib/addMeeting/meetingOptions";
+import type { FormData } from "@/types/meeting";
 
+// Hapus import meetingTypes, priorityLevels
 interface MeetingBasicInfoProps {
-  formData: any;
-  setFormData: (data: any) => void;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   errors: { [key: string]: string };
+  meetingTypes: { label: string; value: string }[];
+  priorityLevels: { label: string; value: string }[];
 }
 
 const MeetingBasicInfo: React.FC<MeetingBasicInfoProps> = ({
   formData,
   setFormData,
   errors,
+  meetingTypes,
+  priorityLevels,
 }) => (
   <div className="space-y-6">
     <div className="space-y-2">

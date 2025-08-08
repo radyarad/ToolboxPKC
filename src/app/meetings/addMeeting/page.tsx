@@ -3,9 +3,6 @@
 import React, { useState } from "react";
 import { ArrowLeft, Save, Eye, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Alert, AlertCircle, AlertDescription } from "@/components/ui/alert";
-
 import MeetingBasicInfo from "@/components/addMeeting/MeetingBasicInfo";
 import MeetingDateTime from "@/components/addMeeting/MeetingDateTime";
 import MeetingLocation from "@/components/addMeeting/MeetingLocation";
@@ -21,8 +18,10 @@ import {
   priorityLevels,
   reminderOptions,
 } from "@/lib/addMeeting/meetingOptions";
+import type { Participant, FormData, Contact } from "@/types/meeting";
 
-const defaultFormData = {
+// --- Default Data
+const defaultFormData: FormData = {
   title: "",
   description: "",
   date: new Date().toISOString().split("T")[0],
@@ -46,7 +45,7 @@ const defaultFormData = {
   waitingRoom: true,
 };
 
-const suggestedContactsData = [
+const suggestedContactsData: Contact[] = [
   {
     name: "Sarah Kusuma",
     email: "sarah.kusuma@pkc.com",
@@ -62,11 +61,7 @@ const suggestedContactsData = [
     email: "budi.santoso@pkc.com",
     department: "Development",
   },
-  {
-    name: "Dewi Lestari",
-    email: "dewi.lestari@pkc.com",
-    department: "Design",
-  },
+  { name: "Dewi Lestari", email: "dewi.lestari@pkc.com", department: "Design" },
   { name: "Eko Prasetyo", email: "eko.prasetyo@pkc.com", department: "QA" },
   {
     name: "Fitri Maharani",
@@ -82,72 +77,48 @@ const suggestedContactsData = [
 ];
 
 const AddMeetingPage = () => {
-  const [formData, setFormData] = useState(defaultFormData);
+  const [formData, setFormData] = useState<FormData>(defaultFormData);
   const [participantInput, setParticipantInput] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>(
+    {}
+  );
   const [isSaving, setIsSaving] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
-
-  const [suggestedContacts] = useState(suggestedContactsData);
-  const [filteredContacts, setFilteredContacts] = useState([]);
+  const [suggestedContacts] = useState<Contact[]>(suggestedContactsData);
+  const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // VALIDATION
-  const validateForm = () => {
-    const newErrors = {};
+  // ...fungsi2 handleForm...
 
-    if (!formData.title.trim()) {
-      newErrors.title = "Judul meeting wajib diisi";
-    }
-    if (!formData.date) {
-      newErrors.date = "Tanggal meeting wajib diisi";
-    }
-    if (!formData.startTime) {
-      newErrors.startTime = "Waktu mulai wajib diisi";
-    }
-    if (!formData.endTime) {
-      newErrors.endTime = "Waktu selesai wajib diisi";
-    }
+  const validateForm = () => {
+    const newErrors: Partial<Record<keyof FormData, string>> = {};
+    if (!formData.title.trim()) newErrors.title = "Judul meeting wajib diisi";
+    if (!formData.date) newErrors.date = "Tanggal meeting wajib diisi";
+    if (!formData.startTime) newErrors.startTime = "Waktu mulai wajib diisi";
+    if (!formData.endTime) newErrors.endTime = "Waktu selesai wajib diisi";
     if (
       formData.startTime &&
       formData.endTime &&
       formData.startTime >= formData.endTime
-    ) {
+    )
       newErrors.endTime = "Waktu selesai harus setelah waktu mulai";
-    }
-    if (formData.isOnline && !formData.meetingLink.trim()) {
+    if (formData.isOnline && !formData.meetingLink.trim())
       newErrors.meetingLink = "Link meeting wajib diisi untuk meeting online";
-    }
-    if (!formData.isOnline && !formData.location.trim()) {
+    if (!formData.isOnline && !formData.location.trim())
       newErrors.location = "Lokasi meeting wajib diisi";
-    }
-    if (formData.participants.length === 0) {
+    if (formData.participants.length === 0)
       newErrors.participants = "Minimal harus ada 1 peserta";
-    }
-    if (formData.requirePassword && !formData.meetingPassword.trim()) {
+    if (formData.requirePassword && !formData.meetingPassword.trim())
       newErrors.meetingPassword = "Password meeting wajib diisi";
-    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // HANDLE SAVE
   const handleSave = async () => {
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
     setIsSaving(true);
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      const meetingData = {
-        ...formData,
-        id: Date.now(),
-        organizer: "Current User",
-        status: "confirmed",
-        createdAt: new Date().toISOString(),
-      };
-      // (do something)
       alert("Meeting berhasil dibuat!");
     } catch (error) {
       alert("Gagal membuat meeting. Silakan coba lagi.");
@@ -156,8 +127,7 @@ const AddMeetingPage = () => {
     }
   };
 
-  // PARTICIPANTS
-  const handleParticipantInputChange = (value) => {
+  const handleParticipantInputChange = (value: string) => {
     setParticipantInput(value);
     if (value.trim()) {
       const filtered = suggestedContacts.filter(
@@ -175,7 +145,7 @@ const AddMeetingPage = () => {
     }
   };
 
-  const addParticipant = (contact) => {
+  const addParticipant = (contact: Contact) => {
     if (!formData.participants.find((p) => p.email === contact.email)) {
       setFormData({
         ...formData,
@@ -190,39 +160,30 @@ const AddMeetingPage = () => {
     setFilteredContacts([]);
   };
 
-  const removeParticipant = (email) => {
+  const removeParticipant = (email: string) => {
     setFormData({
       ...formData,
       participants: formData.participants.filter((p) => p.email !== email),
     });
   };
 
-  // AGENDA
   const addAgendaItem = () => {
-    setFormData({
-      ...formData,
-      agenda: [...formData.agenda, ""],
-    });
+    setFormData({ ...formData, agenda: [...formData.agenda, ""] });
   };
-  const updateAgendaItem = (index, value) => {
+
+  const updateAgendaItem = (index: number, value: string) => {
     const newAgenda = [...formData.agenda];
     newAgenda[index] = value;
-    setFormData({
-      ...formData,
-      agenda: newAgenda,
-    });
+    setFormData({ ...formData, agenda: newAgenda });
   };
-  const removeAgendaItem = (index) => {
+
+  const removeAgendaItem = (index: number) => {
     if (formData.agenda.length > 1) {
       const newAgenda = formData.agenda.filter((_, i) => i !== index);
-      setFormData({
-        ...formData,
-        agenda: newAgenda,
-      });
+      setFormData({ ...formData, agenda: newAgenda });
     }
   };
 
-  // GENERATORS
   const generateMeetingLink = () => {
     const randomId = Math.random().toString(36).substring(2, 15);
     setFormData({
@@ -230,6 +191,7 @@ const AddMeetingPage = () => {
       meetingLink: `https://meet.google.com/${randomId}`,
     });
   };
+
   const generatePassword = () => {
     const chars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -237,10 +199,7 @@ const AddMeetingPage = () => {
     for (let i = 0; i < 8; i++) {
       password += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    setFormData({
-      ...formData,
-      meetingPassword: password,
-    });
+    setFormData({ ...formData, meetingPassword: password });
   };
 
   return (

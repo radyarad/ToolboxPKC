@@ -8,16 +8,9 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import type { Participant, Contact } from "@/types/meeting";
 
-interface Contact {
-  name: string;
-  email: string;
-  department?: string;
-}
-
-interface Participant extends Contact {
-  status: string;
-}
+// JANGAN deklarasi ulang Contact atau Participant di sini!
 
 interface ParticipantsSidebarProps {
   participants: Participant[];
@@ -161,7 +154,7 @@ const ParticipantsSidebar: React.FC<ParticipantsSidebarProps> = ({
               variant="ghost"
               className="w-full justify-start p-2 h-auto"
               onClick={() => addParticipant(contact)}
-              disabled={participants.find((p) => p.email === contact.email)}
+              disabled={!!participants.find((p) => p.email === contact.email)}
             >
               <div className="flex items-center space-x-2 w-full">
                 <div className="h-6 w-6 bg-muted rounded-full flex items-center justify-center text-muted-foreground text-xs font-medium flex-shrink-0">

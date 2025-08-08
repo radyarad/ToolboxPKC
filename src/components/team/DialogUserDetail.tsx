@@ -8,13 +8,21 @@ import {
 import { Building, Mail, MapPin, Phone } from "lucide-react";
 import React from "react";
 
+interface UserDetailProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  user: any;
+  getRoleInfo: (role: string) => { color: string };
+  getStatusColor: (status: string) => string;
+}
+
 export default function DialogUserDetail({
   open,
   onOpenChange,
   user,
   getRoleInfo,
   getStatusColor,
-}) {
+}: UserDetailProps) {
   if (!user) return null;
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -102,7 +110,7 @@ export default function DialogUserDetail({
           <h5 className="font-semibold mb-3">Keahlian</h5>
           <div className="flex flex-wrap gap-2">
             {user.skills?.length ? (
-              user.skills.map((skill, idx) => (
+              user.skills.map((skill: string, idx: number) => (
                 <span
                   key={idx}
                   className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full"

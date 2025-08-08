@@ -11,6 +11,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+type TeamHeaderProps = {
+  searchQuery: string;
+  setSearchQuery: (v: string) => void;
+  selectedDepartment: string;
+  setSelectedDepartment: (v: string) => void;
+  departments: string[];
+  onAdd: () => void;
+};
+
 export default function TeamHeader({
   searchQuery,
   setSearchQuery,
@@ -18,7 +27,7 @@ export default function TeamHeader({
   setSelectedDepartment,
   departments,
   onAdd,
-}) {
+}: TeamHeaderProps) {
   return (
     <header className="border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">

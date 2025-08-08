@@ -8,6 +8,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { User } from "@/types/team/type";
+
+interface TeamTableProps {
+  filteredMembers: User[];
+  getRoleInfo: (role: string) => {
+    name: string;
+    icon?: React.ElementType;
+    color: string;
+  };
+  getStatusColor: (status: string) => string;
+  onViewDetail: (user: User) => void;
+  onEdit: (user: User) => void;
+}
 
 export default function TeamTable({
   filteredMembers,
@@ -15,7 +28,7 @@ export default function TeamTable({
   getStatusColor,
   onViewDetail,
   onEdit,
-}) {
+}: TeamTableProps) {
   return (
     <div className=" rounded-xl shadow-sm border border-gray-200 dark:border-gray-200/20">
       <div className="p-6 border-b border-gray-200 dark:border-gray-200/20">
@@ -73,7 +86,7 @@ export default function TeamTable({
                 <TableCell className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     {getRoleInfo(member.role)?.icon &&
-                      React.createElement(getRoleInfo(member.role).icon, {
+                      React.createElement(getRoleInfo(member.role)!.icon!, {
                         className: "h-4 w-4 mr-2 text-gray-400",
                       })}
                     <span
@@ -95,7 +108,9 @@ export default function TeamTable({
                   </span>
                   <div className="text-xs text-gray-500 mt-1">
                     Last active:{" "}
-                    {new Date(member.lastActive).toLocaleDateString()}
+                    {member.lastActive
+                      ? new Date(member.lastActive).toLocaleDateString()
+                      : "-"}
                   </div>
                 </TableCell>
                 <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

@@ -10,6 +10,7 @@ import {
   FileText,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import type { FormData } from "@/types/meeting";
 
 interface Participant {
   name: string;
@@ -17,19 +18,7 @@ interface Participant {
 }
 
 interface MeetingSummaryProps {
-  formData: {
-    title: string;
-    date: string;
-    startTime: string;
-    endTime: string;
-    timezone: string;
-    isOnline: boolean;
-    meetingLink: string;
-    location: string;
-    participants: Participant[];
-    recurring: string;
-    agenda: string[];
-  };
+  formData: FormData;
   recurringOptions: { value: string; label: string }[];
 }
 

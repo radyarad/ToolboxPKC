@@ -5,10 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import type { FormData } from "@/types/meeting";
 
 interface MeetingLocationProps {
-  formData: any;
-  setFormData: (data: any) => void;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   errors: { [key: string]: string };
   generateMeetingLink: () => void;
 }
@@ -25,7 +26,7 @@ const MeetingLocation: React.FC<MeetingLocationProps> = ({
         id="isOnline"
         checked={formData.isOnline}
         onCheckedChange={(checked) =>
-          setFormData({ ...formData, isOnline: checked })
+          setFormData({ ...formData, isOnline: Boolean(checked) })
         }
       />
       <Label htmlFor="isOnline">Meeting Online</Label>

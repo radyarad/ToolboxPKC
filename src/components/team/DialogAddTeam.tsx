@@ -21,6 +21,16 @@ import {
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 
+interface DialogAddTeamProps {
+  open: boolean;
+  mode?: "add" | "edit";
+  user?: any;
+  onClose: () => void;
+  onSave: (data: any, mode: "add" | "edit") => void;
+  departments: string[];
+  roles: { name: string }[];
+}
+
 export default function DialogAddTeam({
   open,
   mode = "add",
@@ -29,7 +39,7 @@ export default function DialogAddTeam({
   onSave,
   departments,
   roles,
-}) {
+}: DialogAddTeamProps) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -65,25 +75,26 @@ export default function DialogAddTeam({
     }
   }, [user, open, mode]);
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   }
 
-  function handleSelectChange(name, value) {
+  function handleSelectChange(name: string, value: string) {
     setForm((prev) => ({
       ...prev,
       [name]: value,
     }));
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim()) return;
     // for edit, pass id
-    let payload = { ...form };
+    let payload: any = { ...form }; // <- ini boleh tetap pakai 'any' kalau memang dynamic
+
     if (mode === "edit" && user?.id) {
       payload.id = user.id;
       payload.avatar = user.avatar;

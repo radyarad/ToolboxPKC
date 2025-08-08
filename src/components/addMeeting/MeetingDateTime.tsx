@@ -10,21 +10,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  recurringOptions,
-  reminderOptions,
-} from "@/lib/addMeeting/meetingOptions";
+// import {
+//   recurringOptions,
+//   reminderOptions,
+// } from "@/lib/addMeeting/meetingOptions";
 
+import type { FormData } from "@/types/meeting";
 interface MeetingDateTimeProps {
-  formData: any;
-  setFormData: (data: any) => void;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   errors: { [key: string]: string };
+  recurringOptions: { label: string; value: string }[]; // tambahkan
+  reminderOptions: { label: string; value: string }[]; // tambahkan
 }
 
 const MeetingDateTime: React.FC<MeetingDateTimeProps> = ({
   formData,
   setFormData,
   errors,
+  recurringOptions,
+  reminderOptions,
 }) => (
   <div className="space-y-6">
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -1,8 +1,17 @@
 import { Users, CheckCircle, Building, Shield } from "lucide-react";
 import React from "react";
 import { Card, CardContent } from "../ui/card";
+import { User } from "@/types/team/type";
 
-export default function TeamStats({ teamMembers, departments }) {
+interface TeamStatsProps {
+  teamMembers: User[];
+  departments: string[];
+}
+
+export default function TeamStats({
+  teamMembers,
+  departments,
+}: TeamStatsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
       <Card>

@@ -3,10 +3,13 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import type { FormData } from "@/types/meeting";
 
 interface MeetingNotesProps {
   notes: string;
-  setFormData: (fn: (prev) => any) => void;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  // atau boleh juga:
+  // setFormData: (fn: (prev: FormData) => FormData) => void;
 }
 
 const MeetingNotes: React.FC<MeetingNotesProps> = ({ notes, setFormData }) => {

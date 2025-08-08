@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { Bell, X, Check, AlertCircle, Info, Calendar } from "lucide-react";
 
 // Mock shadcn UI components - dalam implementasi asli, import dari @/components/ui
-const Button = ({
+const Button: React.FC<{
+  children: React.ReactNode;
+  variant?: "default" | "outline" | "ghost";
+  size?: "default" | "sm" | "icon";
+  className?: string;
+  asChild?: boolean;
+  [key: string]: any; // fallback biar props lain boleh
+}> = ({
   children,
   variant = "default",
   size = "default",
@@ -33,19 +40,25 @@ const Button = ({
   );
 };
 
-const DropdownMenu = ({ children, open, onOpenChange }) => {
+const DropdownMenu: React.FC<{
+  children: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}> = ({ children, open, onOpenChange }) => {
   return <div className="relative inline-block text-left">{children}</div>;
 };
 
-const DropdownMenuTrigger = ({ children }) => {
+const DropdownMenuTrigger: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div>{children}</div>;
 };
 
-const DropdownMenuContent = ({
-  children,
-  align = "center",
-  className = "",
-}) => {
+const DropdownMenuContent: React.FC<{
+  children: React.ReactNode;
+  align?: "center" | "end";
+  className?: string;
+}> = ({ children, align = "center", className = "" }) => {
   return (
     <div
       className={`absolute z-50 min-w-[320px] overflow-hidden rounded-md border bg-background shadow-lg ${
@@ -97,7 +110,7 @@ export default function NotificationButton() {
 
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 
-  const markAsRead = (id) => {
+  const markAsRead = (id: number) => {
     setNotifications((prev) =>
       prev.map((notif) =>
         notif.id === id ? { ...notif, isRead: true } : notif
@@ -111,11 +124,11 @@ export default function NotificationButton() {
     );
   };
 
-  const removeNotification = (id) => {
+  const removeNotification = (id: number) => {
     setNotifications((prev) => prev.filter((notif) => notif.id !== id));
   };
 
-  const getNotificationIcon = (type) => {
+  const getNotificationIcon = (type: string) => {
     switch (type) {
       case "success":
         return <Check className="h-4 w-4 text-green-500" />;

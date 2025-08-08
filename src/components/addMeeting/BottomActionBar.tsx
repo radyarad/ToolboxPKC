@@ -2,9 +2,10 @@
 
 import React from "react";
 import { ArrowLeft } from "lucide-react";
+import type { FormData } from "@/types/meeting";
 
 interface BottomActionBarProps {
-  formData: any;
+  formData: FormData;
   isSaving: boolean;
   handleSave: () => void;
 }

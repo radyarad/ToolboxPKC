@@ -9,24 +9,29 @@ import defaultMembers from "@/lib/team/members";
 import DialogUserDetail from "./DialogUserDetail";
 import DialogAddTeam from "./DialogAddTeam"; // Ubah ke default export
 
-function getRoleInfo(role) {
+function getRoleInfo(role: string) {
   return roles.find((r) => r.name === role) || roles[2];
 }
-function getStatusColor(status) {
+function getStatusColor(status: string) {
   return status === "active"
     ? "bg-green-100 text-green-700"
     : "bg-gray-100 text-gray-700";
 }
 
 export default function TeamManagement() {
+  type Mode = "add" | "edit";
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [teamMembers, setTeamMembers] = useState(defaultMembers);
 
   const [userDialog, setUserDialog] = useState({ open: false, user: null });
-  const [addDialog, setAddDialog] = useState({
+  const [addDialog, setAddDialog] = useState<{
+    open: boolean;
+    mode: Mode;
+    user: any;
+  }>({
     open: false,
-    mode: "add", // "add" or "edit"
+    mode: "add",
     user: null,
   });
 
@@ -42,7 +47,7 @@ export default function TeamManagement() {
   });
 
   // Handler for saving add/edit
-  function handleSave(user, mode) {
+  function handleSave(user: any, mode: Mode) {
     if (mode === "edit" && user?.id) {
       // Update
       setTeamMembers((prev) =>
@@ -57,7 +62,7 @@ export default function TeamManagement() {
           id: Date.now(),
           avatar: user.name
             .split(" ")
-            .map((n) => n[0])
+            .map((n: string) => n[0])
             .join(""),
           status: "active",
           joinDate: new Date().toISOString().split("T")[0],
@@ -89,8 +94,10 @@ export default function TeamManagement() {
             filteredMembers={filteredMembers}
             getRoleInfo={getRoleInfo}
             getStatusColor={getStatusColor}
-            onViewDetail={(user) => setUserDialog({ open: true, user })}
-            onEdit={(user) => setAddDialog({ open: true, mode: "edit", user })}
+            onViewDetail={(user: any) => setUserDialog({ open: true, user })}
+            onEdit={(user: any) =>
+              setAddDialog({ open: true, mode: "edit", user })
+            }
           />
           <DialogUserDetail
             open={userDialog.open}
