@@ -8,8 +8,6 @@ import type { FormData } from "@/types/meeting";
 interface MeetingNotesProps {
   notes: string;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
-  // atau boleh juga:
-  // setFormData: (fn: (prev: FormData) => FormData) => void;
 }
 
 const MeetingNotes: React.FC<MeetingNotesProps> = ({ notes, setFormData }) => {

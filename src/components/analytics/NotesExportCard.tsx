@@ -25,36 +25,36 @@ export default function NotesExportCard({ notes }: Props) {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 gap-3">
-          <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg">
+          <div className="flex justify-between items-center p-3 bg-red-50 dark:bg-red-400/20 rounded-lg">
             <div>
               <div className="font-medium text-sm">Export PDF</div>
               <div className="text-xs text-muted-foreground">
                 Dokumen formal
               </div>
             </div>
-            <div className="text-lg font-bold text-red-600">
+            <div className="text-lg font-bold text-red-600 dark:text-red-500">
               {notes.exported_pdf}
             </div>
           </div>
-          <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+          <div className="flex justify-between items-center p-3 bg-green-50 dark:bg-green-400/20 rounded-lg">
             <div>
               <div className="font-medium text-sm">Share WhatsApp</div>
               <div className="text-xs text-muted-foreground">
                 Komunikasi cepat
               </div>
             </div>
-            <div className="text-lg font-bold text-green-600">
+            <div className="text-lg font-bold text-green-600 dark:text-green-500">
               {notes.shared_whatsapp}
             </div>
           </div>
-          <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+          <div className="flex justify-between items-center p-3 bg-blue-50 dark:bg-blue-400/20 rounded-lg">
             <div>
               <div className="font-medium text-sm">Share Email</div>
               <div className="text-xs text-muted-foreground">
                 Distribusi resmi
               </div>
             </div>
-            <div className="text-lg font-bold text-blue-600">
+            <div className="text-lg font-bold text-blue-600 dark:text-blue-500">
               {notes.shared_email}
             </div>
           </div>

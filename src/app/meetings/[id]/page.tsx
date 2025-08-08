@@ -35,7 +35,7 @@ import {
 import { AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// ------- EXPORT TO PDF FUNCTION Tetap di sini ---------
+// Export PDF function (tetap sama)
 function exportToPDF(meeting: Meeting, minutes: MeetingMinutes) {
   const htmlContent = `
     <!DOCTYPE html>
@@ -321,6 +321,74 @@ function exportToPDF(meeting: Meeting, minutes: MeetingMinutes) {
           margin-bottom: 5px;
         }
         
+        /* Signature Section Styles */
+        .signature-section {
+          margin-top: 50px;
+          padding: 30px 0;
+          border-top: 2px solid #e5e7eb;
+          page-break-inside: avoid;
+        }
+        
+        .signature-section h3 {
+          font-size: 18px;
+          color: #1e40af;
+          text-align: center;
+          margin-bottom: 40px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: bold;
+        }
+        
+        .signature-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-top: 30px;
+        }
+        
+        .signature-box {
+          text-align: center;
+          flex: 1;
+          margin: 0 20px;
+        }
+        
+        .signature-title {
+          font-weight: bold;
+          color: #374151;
+          margin-bottom: 15px;
+          font-size: 14px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        
+        .signature-line {
+          border-bottom: 2px solid #374151;
+          margin: 60px auto 15px;
+          width: 200px;
+          height: 80px;
+          position: relative;
+        }
+        
+        .signature-name {
+          font-weight: 600;
+          color: #1f2937;
+          font-size: 14px;
+          margin-top: 10px;
+        }
+        
+        .signature-position {
+          font-size: 12px;
+          color: #6b7280;
+          font-style: italic;
+          margin-top: 5px;
+        }
+        
+        .signature-date {
+          font-size: 12px;
+          color: #6b7280;
+          margin-top: 15px;
+        }
+        
         @media print {
           body {
             padding: 0;
@@ -329,6 +397,11 @@ function exportToPDF(meeting: Meeting, minutes: MeetingMinutes) {
           
           .section {
             page-break-inside: avoid;
+          }
+          
+          .signature-section {
+            page-break-inside: avoid;
+            margin-top: 50px;
           }
         }
         
@@ -497,15 +570,14 @@ function exportToPDF(meeting: Meeting, minutes: MeetingMinutes) {
       <!-- Additional Notes -->
       ${
         minutes.additionalNotes
-          ? `
-      <div class="section">
-        <h3>Catatan Tambahan</h3>
-        <div class="notes-section">
-          <p>${minutes.additionalNotes}</p>
-        </div>
-      </div>
-      `
-          : ""
+          ? ""
+          : //           <div class="section">
+            //   <h3>Catatan Tambahan</h3>
+            //   <div class="notes-section">
+            //     <p>${minutes.additionalNotes}</p>
+            //   </div>
+            // </div>
+            ""
       }
 
       <!-- Next Meeting -->
@@ -519,6 +591,28 @@ function exportToPDF(meeting: Meeting, minutes: MeetingMinutes) {
       `
           : ""
       }
+
+      <!-- Signature Section -->
+      <div class="signature-section">
+        <h3>Pengesahan Notulensi</h3>
+        <div class="signature-container">
+          <div class="signature-box">
+            <div class="signature-title">Pemimpin Rapat</div>
+            <div class="signature-line"></div>
+            <div class="signature-name">${meeting.organizer}</div>
+            <div class="signature-position">Ketua Rapat</div>
+            <div class="signature-date">Tanggal: _________________</div>
+          </div>
+          
+          <div class="signature-box">
+            <div class="signature-title">Notulen</div>
+            <div class="signature-line"></div>
+            <div class="signature-name">_________________________</div>
+            <div class="signature-position">Penulis Notulensi</div>
+            <div class="signature-date">Tanggal: _________________</div>
+          </div>
+        </div>
+      </div>
 
       <!-- Footer -->
       <div class="footer">
@@ -554,7 +648,6 @@ function exportToPDF(meeting: Meeting, minutes: MeetingMinutes) {
     };
   }
 }
-// -------------------------------------------------------
 
 export default function MeetingDetailPage({
   params,
@@ -565,7 +658,6 @@ export default function MeetingDetailPage({
   const meetingId = parseInt(id);
   const meeting = DataMeetings.find((m) => m.id === meetingId);
   const [minutes, setMinutes] = useState<MeetingMinutes>(SampleMeetingMinutes);
-  const [isEditing, setIsEditing] = useState(false);
 
   if (!meeting) {
     return (
@@ -588,6 +680,12 @@ export default function MeetingDetailPage({
     );
   }
 
+  const handleSaveMinutes = (updatedMinutes: MeetingMinutes) => {
+    setMinutes(updatedMinutes);
+    // In real app, this would be an API call to save to backend
+    console.log("Minutes updated:", updatedMinutes);
+  };
+
   const uncompletedAgenda = minutes.agendaItems.filter(
     (item) => item.discussed && !item.completed
   );
@@ -600,9 +698,9 @@ export default function MeetingDetailPage({
       <div className="max-w-6xl mx-auto space-y-6">
         <MeetingHeader
           meeting={meeting}
-          isEditing={isEditing}
-          setIsEditing={setIsEditing}
+          minutes={minutes}
           onExportPDF={() => exportToPDF(meeting, minutes)}
+          onSaveMinutes={handleSaveMinutes}
         />
         <MeetingInfoCard meeting={meeting} />
         <AlertIncompleteItems

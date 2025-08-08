@@ -26,7 +26,6 @@ export interface FormData {
   participants: Participant[];
   priority: string;
   reminder: string;
-  timezone: string;
   isPrivate: boolean;
   allowRecording: boolean;
   requirePassword: boolean;

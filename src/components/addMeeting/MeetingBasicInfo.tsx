@@ -1,3 +1,4 @@
+// /components/addMeeting/MeetingBasicInfo.tsx
 "use client";
 
 import React from "react";
@@ -15,7 +16,6 @@ import {
 } from "@/components/ui/select";
 import type { FormData } from "@/types/meeting";
 
-// Hapus import meetingTypes, priorityLevels
 interface MeetingBasicInfoProps {
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
@@ -62,15 +62,16 @@ const MeetingBasicInfo: React.FC<MeetingBasicInfoProps> = ({
       />
     </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {/* Grid 2 kolom (Timezone dihapus) */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div className="space-y-2">
         <Label>Tipe Meeting</Label>
         <Select
           value={formData.type}
           onValueChange={(value) => setFormData({ ...formData, type: value })}
         >
-          <SelectTrigger>
-            <SelectValue />
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Pilih tipe meeting" />
           </SelectTrigger>
           <SelectContent>
             {meetingTypes.map((type) => (
@@ -90,8 +91,8 @@ const MeetingBasicInfo: React.FC<MeetingBasicInfoProps> = ({
             setFormData({ ...formData, priority: value })
           }
         >
-          <SelectTrigger>
-            <SelectValue />
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Pilih prioritas" />
           </SelectTrigger>
           <SelectContent>
             {priorityLevels.map((level) => (
@@ -99,26 +100,6 @@ const MeetingBasicInfo: React.FC<MeetingBasicInfoProps> = ({
                 {level.label}
               </SelectItem>
             ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="space-y-2">
-        <Label>Timezone</Label>
-        <Select
-          value={formData.timezone}
-          onValueChange={(value) =>
-            setFormData({ ...formData, timezone: value })
-          }
-        >
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="WIB">WIB (UTC+7)</SelectItem>
-            <SelectItem value="WITA">WITA (UTC+8)</SelectItem>
-            <SelectItem value="WIT">WIT (UTC+9)</SelectItem>
-            <SelectItem value="UTC">UTC (UTC+0)</SelectItem>
           </SelectContent>
         </Select>
       </div>

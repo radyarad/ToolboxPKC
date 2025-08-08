@@ -17,7 +17,7 @@ export default function AlertIncompleteItems({
   return (
     <Alert>
       <AlertCircle className="h-4 w-4" />
-      <AlertDescription>
+      <AlertDescription className="text-red-600 dark:text-red-500">
         Meeting sudah selesai namun masih ada {uncompletedAgendaCount} agenda
         yang belum selesai dan {pendingActionsCount} action item yang pending.
       </AlertDescription>

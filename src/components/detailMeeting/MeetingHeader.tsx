@@ -1,22 +1,23 @@
 "use client";
 
-import { ArrowLeft, Edit, Download } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import type { Meeting, MeetingMinutes } from "@/lib/detailMeeting/types";
+import EditNotulensDialog from "@/components/detailMeeting/EditNotulensiDialog";
 
 type Props = {
   meeting: Meeting;
-  isEditing: boolean;
-  setIsEditing: (v: boolean) => void;
+  minutes: MeetingMinutes;
   onExportPDF: () => void;
+  onSaveMinutes: (updatedMinutes: MeetingMinutes) => void;
 };
 
 export default function MeetingHeader({
   meeting,
-  isEditing,
-  setIsEditing,
+  minutes,
   onExportPDF,
+  onSaveMinutes,
 }: Props) {
   return (
     <div className="flex items-center justify-between">
@@ -36,15 +37,11 @@ export default function MeetingHeader({
         </div>
       </div>
       <div className="flex gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setIsEditing(!isEditing)}
-          className="gap-2"
-        >
-          <Edit className="h-4 w-4" />
-          {isEditing ? "Batal Edit" : "Edit Notulensi"}
-        </Button>
+        <EditNotulensDialog
+          meeting={meeting}
+          minutes={minutes}
+          onSave={onSaveMinutes}
+        />
         <Button
           variant="default"
           size="sm"

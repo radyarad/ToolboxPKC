@@ -1,3 +1,4 @@
+// /components/addMeeting/MeetingSummary.tsx
 "use client";
 
 import React from "react";
@@ -11,11 +12,6 @@ import {
 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import type { FormData } from "@/types/meeting";
-
-interface Participant {
-  name: string;
-  email: string;
-}
 
 interface MeetingSummaryProps {
   formData: FormData;
@@ -47,7 +43,7 @@ const MeetingSummary: React.FC<MeetingSummaryProps> = ({
             </div>
             <div className="text-xs text-muted-foreground">
               {formData.startTime && formData.endTime
-                ? `${formData.startTime} - ${formData.endTime} ${formData.timezone}`
+                ? `${formData.startTime} - ${formData.endTime}`
                 : "Waktu belum ditentukan"}
             </div>
           </div>

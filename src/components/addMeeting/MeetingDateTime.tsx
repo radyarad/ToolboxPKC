@@ -1,3 +1,4 @@
+// /components/addMeeting/MeetingDateTime.tsx
 "use client";
 
 import React from "react";
@@ -10,18 +11,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import {
-//   recurringOptions,
-//   reminderOptions,
-// } from "@/lib/addMeeting/meetingOptions";
-
 import type { FormData } from "@/types/meeting";
+
 interface MeetingDateTimeProps {
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   errors: { [key: string]: string };
-  recurringOptions: { label: string; value: string }[]; // tambahkan
-  reminderOptions: { label: string; value: string }[]; // tambahkan
+  recurringOptions: { label: string; value: string }[];
+  reminderOptions: { label: string; value: string }[];
 }
 
 const MeetingDateTime: React.FC<MeetingDateTimeProps> = ({
@@ -87,8 +84,8 @@ const MeetingDateTime: React.FC<MeetingDateTimeProps> = ({
             setFormData({ ...formData, recurring: value })
           }
         >
-          <SelectTrigger>
-            <SelectValue />
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Tidak berulang" />
           </SelectTrigger>
           <SelectContent>
             {recurringOptions.map((option) => (
@@ -108,8 +105,8 @@ const MeetingDateTime: React.FC<MeetingDateTimeProps> = ({
             setFormData({ ...formData, reminder: value })
           }
         >
-          <SelectTrigger>
-            <SelectValue />
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Pilih reminder" />
           </SelectTrigger>
           <SelectContent>
             {reminderOptions.map((option) => (

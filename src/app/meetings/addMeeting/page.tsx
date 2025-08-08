@@ -37,7 +37,6 @@ const defaultFormData: FormData = {
   participants: [],
   priority: "medium",
   reminder: "15",
-  timezone: "WIB",
   isPrivate: false,
   allowRecording: true,
   requirePassword: false,
@@ -281,7 +280,7 @@ const AddMeetingPage = () => {
               updateAgendaItem={updateAgendaItem}
               removeAgendaItem={removeAgendaItem}
             />
-            <MeetingNotes notes={formData.notes} setFormData={setFormData} />
+            {/* <MeetingNotes notes={formData.notes} setFormData={setFormData} /> */}
           </div>
 
           {/* SIDEBAR (1 column) */}

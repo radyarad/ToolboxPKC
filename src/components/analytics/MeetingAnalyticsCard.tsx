@@ -35,17 +35,21 @@ export default function MeetingAnalyticsCard({ meetings }: Props) {
           <Progress value={meetings.attendance_rate} className="h-2" />
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <div className="text-center p-3 bg-blue-50 rounded-lg">
-            <div className="text-lg font-bold text-blue-600">
+          <div className="text-center p-3 bg-blue-50 dark:bg-blue-400/20 rounded-lg">
+            <div className="text-lg font-bold text-blue-600 dark:text-blue-500">
               {meetings.upcoming}
             </div>
-            <div className="text-xs text-blue-600">Meeting Mendatang</div>
+            <div className="text-xs text-blue-600 dark:text-blue-500">
+              Meeting Mendatang
+            </div>
           </div>
-          <div className="text-center p-3 bg-green-50 rounded-lg">
-            <div className="text-lg font-bold text-green-600">
+          <div className="text-center p-3 bg-green-50 dark:bg-green-400/20 rounded-lg">
+            <div className="text-lg font-bold text-green-600 dark:text-green-500">
               {meetings.attendance_rate}%
             </div>
-            <div className="text-xs text-green-600">Attendance Rate</div>
+            <div className="text-xs text-green-600 dark:text-green-500">
+              Attendance Rate
+            </div>
           </div>
         </div>
       </CardContent>

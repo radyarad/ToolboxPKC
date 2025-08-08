@@ -6,6 +6,7 @@ const departments = [
   "Human Resources",
   "Finance",
   "Marketing",
+  "Biro TI",
 ];
 
 export default departments;
