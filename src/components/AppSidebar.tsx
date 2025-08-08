@@ -107,7 +107,7 @@ export default function AppSidebar() {
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
-            <Collapsible defaultOpen className="group/collapsible">
+            <Collapsible className="group/collapsible">
               <SidebarMenu>
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
