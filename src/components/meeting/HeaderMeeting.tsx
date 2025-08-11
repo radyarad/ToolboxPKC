@@ -67,14 +67,14 @@ const MeetingsHeader: React.FC<MeetingsHeaderProps> = ({
           </nav>
         </div>
         <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2 bg-gray-100 rounded-lg px-3 py-2">
+          <div className="flex items-center space-x-2 bg-gray-100 rounded-lg px-3 py-2 text-muted-foreground">
             <Search className="h-4 w-4 text-gray-500" />
             <input
               type="text"
               placeholder="Cari meeting..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent border-none outline-none text-sm w-48"
+              className="bg-transparent border-none outline-none text-sm w-48 text-black"
             />
           </div>
           <button className="flex items-center space-x-2 px-3 py-2 hover:text-gray-900 dark:hover:text-white/90 border border-gray-300 rounded-lg">

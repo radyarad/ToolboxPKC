@@ -93,6 +93,28 @@ const AddMeetingPage = () => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
     if (!formData.title.trim()) newErrors.title = "Judul meeting wajib diisi";
     if (!formData.date) newErrors.date = "Tanggal meeting wajib diisi";
+
+    // Validate that the selected date and time is not in the past
+    if (formData.date && formData.startTime) {
+      const selectedDateTime = new Date(
+        `${formData.date}T${formData.startTime}`
+      );
+      const now = new Date();
+
+      if (selectedDateTime <= now) {
+        newErrors.date = "Tanggal dan waktu meeting tidak boleh di masa lalu";
+      }
+    } else if (formData.date) {
+      // If only date is selected, check if it's today or in the future
+      const selectedDate = new Date(formData.date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      if (selectedDate < today) {
+        newErrors.date = "Tanggal meeting tidak boleh di masa lalu";
+      }
+    }
+
     if (!formData.startTime) newErrors.startTime = "Waktu mulai wajib diisi";
     if (!formData.endTime) newErrors.endTime = "Waktu selesai wajib diisi";
     if (

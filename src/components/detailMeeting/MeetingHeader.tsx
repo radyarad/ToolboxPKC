@@ -9,14 +9,16 @@ import EditNotulensDialog from "@/components/detailMeeting/EditNotulensiDialog";
 type Props = {
   meeting: Meeting;
   minutes: MeetingMinutes;
-  onExportPDF: () => void;
+  onExportPDFWithoutNotes: () => void;
+  onExportPDFWithNotes: () => void;
   onSaveMinutes: (updatedMinutes: MeetingMinutes) => void;
 };
 
 export default function MeetingHeader({
   meeting,
   minutes,
-  onExportPDF,
+  onExportPDFWithoutNotes,
+  onExportPDFWithNotes,
   onSaveMinutes,
 }: Props) {
   return (
@@ -43,13 +45,22 @@ export default function MeetingHeader({
           onSave={onSaveMinutes}
         />
         <Button
-          variant="default"
+          variant="outline"
           size="sm"
-          onClick={onExportPDF}
+          onClick={onExportPDFWithoutNotes}
           className="gap-2"
         >
           <Download className="h-4 w-4" />
           Export PDF
+        </Button>
+        <Button
+          variant="default"
+          size="sm"
+          onClick={onExportPDFWithNotes}
+          className="gap-2"
+        >
+          <Download className="h-4 w-4" />
+          Export PDF + Notes
         </Button>
       </div>
     </div>

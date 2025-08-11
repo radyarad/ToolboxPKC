@@ -32,7 +32,9 @@ const Navbar = () => {
       {/* Kiri */}
       <div className="flex items-center space-x-4">
         <SidebarTrigger />
-        <h1 className="lg:text-2xl font-bold text-lg">Web Toolbox PKC</h1>
+        <h1 className="sm:text-md lg:text-2xl font-bold text-md">
+          Web Toolbox PKC
+        </h1>
         <div className="hidden md:flex items-center space-x-2 bg-gray-100 rounded-lg px-3 py-2">
           <Search className="h-4 w-4 text-gray-500" />
           <input
