@@ -13,6 +13,7 @@ import {
   Home,
   Plus,
   PlusCircle,
+  ScanQrCode,
   Speech,
   User2,
   Users,
@@ -51,7 +52,7 @@ import { useSidebar } from "./ui/sidebar";
 const items = [
   {
     title: "Dashboard",
-    url: "/",
+    url: "/dashboard",
     icon: Home,
   },
   {
@@ -74,7 +75,7 @@ export default function AppSidebar() {
           <SidebarMenuItem>
             <div className="flex items-center">
               <SidebarMenuButton className="w-12 h-12" asChild>
-                <Link href="/">
+                <Link href="/dashboard">
                   <Image
                     src="/logo_pkc_light.png"
                     alt="logo"
@@ -184,17 +185,27 @@ export default function AppSidebar() {
                   </CollapsibleContent>
                 </SidebarMenuItem>
               </SidebarMenu>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <Link href="/analytics">
-                      <ChartColumnIncreasing />
-                      <span>Analytics</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
             </Collapsible>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/attendance">
+                    <ScanQrCode />
+                    <span>Attendance</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/analytics">
+                    <ChartColumnIncreasing />
+                    <span>Analytics</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

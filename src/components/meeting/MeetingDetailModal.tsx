@@ -13,8 +13,8 @@ import {
   Copy,
   Send,
 } from "lucide-react";
-import { Meeting } from "@/lib/meetings/DataMeeting";
-import { getTypeColor, getStatusColor } from "@/lib/meetings/DataMeeting";
+import { Meeting } from "@/lib/scheduler/DataMeeting";
+import { getTypeColor, getStatusColor } from "@/lib/scheduler/DataMeeting";
 
 type MeetingDetailModalProps = {
   show: boolean;

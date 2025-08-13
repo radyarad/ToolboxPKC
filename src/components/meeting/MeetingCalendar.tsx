@@ -8,8 +8,8 @@ import {
   Video,
   MapPin,
 } from "lucide-react";
-import { Meeting } from "@/lib/meetings/DataMeeting";
-import { getDaysInMonth, getTypeColor } from "@/lib/meetings/DataMeeting";
+import { Meeting } from "@/lib/scheduler/DataMeeting";
+import { getDaysInMonth, getTypeColor } from "@/lib/scheduler/DataMeeting";
 
 type MeetingsCalendarProps = {
   currentDate: Date;

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { X } from "lucide-react";
-import { Meeting } from "@/lib/meetings/DataMeeting";
+import { Meeting } from "@/lib/scheduler/DataMeeting";
 
 type CreateMeetingModalProps = {
   show: boolean;

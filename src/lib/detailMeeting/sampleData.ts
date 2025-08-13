@@ -1,3 +1,4 @@
+// /lib/detailMeeting/sampleData.ts
 import type { Meeting, MeetingMinutes } from "./types";
 
 export const DataMeetings: Meeting[] = [

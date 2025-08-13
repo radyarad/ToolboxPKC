@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Calendar, Clock, Video, AlertCircle } from "lucide-react";
-import { Meeting } from "@/lib/meetings/DataMeeting";
+import { Meeting } from "@/lib/scheduler/DataMeeting";
 import { Card, CardContent } from "../ui/card";
 
 type MeetingsStatsCardsProps = {

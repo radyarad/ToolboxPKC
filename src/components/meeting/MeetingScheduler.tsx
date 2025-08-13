@@ -7,7 +7,7 @@ import {
   getDaysInMonth,
   getTypeColor,
   getStatusColor,
-} from "@/lib/meetings/DataMeeting";
+} from "@/lib/scheduler/DataMeeting";
 
 import MeetingsHeader from "./HeaderMeeting";
 import MeetingsStatsCards from "./StatsCard";

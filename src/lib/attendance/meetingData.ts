@@ -1,29 +1,4 @@
-// /lib/meeting.data.ts
-
-export type Participant = {
-  name: string;
-  email: string;
-  status: "accepted" | "pending" | "declined";
-};
-
-export type Meeting = {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  type: string;
-  location: string;
-  isOnline: boolean;
-  organizer: string;
-  participants: Participant[];
-  agenda: string[];
-  status: string;
-  meetingLink: string;
-  recurring: string;
-  notes: string;
-};
+import type { Meeting } from "@/lib/attendance/meetingTypes";
 
 export const DataMeetings: Meeting[] = [
   {
@@ -67,7 +42,8 @@ export const DataMeetings: Meeting[] = [
   {
     id: 2,
     title: "Client Presentation - Q3 Report",
-    description: "Presentasi laporan quarterly kepada klien utama",
+    description:
+      "Presentasi laporan quarterly kepada klien utama oleh anggota biro IT",
     date: "2025-08-01",
     startTime: "14:00",
     endTime: "15:30",
