@@ -60,44 +60,42 @@ export default function InformationTable() {
     }
   };
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {/* task terbaru */}
       <div className="lg:col-span-2">
         <Card>
-          <CardHeader className="p-3 sm:p-4 lg:p-6">
+          <CardHeader>
             <CardTitle>
               <div className="flex items-center justify-between">
-                <p className="text-base sm:text-lg">Task Terbaru</p>
+                <p>Task Terbaru</p>
                 <Link
                   href={"/task/new"}
-                  className="flex gap-1 sm:gap-2 items-center text-primary text-sm sm:text-base"
+                  className="flex gap-2 items-center text-primary"
                 >
-                  <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <Plus className="h-4 w-4" />
                   <p>Tambah Task</p>
                 </Link>
               </div>
             </CardTitle>
           </CardHeader>
           <Separator />
-          <CardContent className="p-3 sm:p-4 lg:p-6">
+          <CardContent>
             {/* data nya */}
-            <div className="space-y-3 sm:space-y-4">
+            <div className="space-y-4">
               {sortedTasks.map((task) => (
-                <Card key={task.id} className="flex items-start p-3 sm:p-4">
+                <Card key={task.id} className="flex items-start p-4">
                   <div className="flex items-center justify-between w-full">
-                    <div className="flex flex-row items-center space-x-2 sm:space-x-4">
+                    <div className="flex flex-row items-center space-x-4">
                       <div
-                        className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full ${getPriorityColor(
+                        className={`h-3 w-3 rounded-full ${getPriorityColor(
                           task.priority
                         )}`}
                       ></div>
                       <div>
-                        <h4 className="font-medium text-sm sm:text-base">
-                          {task.title}
-                        </h4>
-                        <div className="flex items-center space-x-1 sm:space-x-2 mt-1">
+                        <h4 className="font-medium">{task.title}</h4>
+                        <div className="flex items-center space-x-2 mt-1">
                           <span
-                            className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium ${getStatusColor(
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
                               task.status
                             )}`}
                           >
@@ -121,7 +119,7 @@ export default function InformationTable() {
                     <DropdownMenu>
                       <DropdownMenuTrigger>
                         <Button variant="ghost" className="p-1" asChild>
-                          <MoreHorizontal className="h-7 w-7 sm:h-9 sm:w-9" />
+                          <MoreHorizontal className="h-9 w-9" />
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
@@ -148,52 +146,48 @@ export default function InformationTable() {
       </div>
       {/* Meeting */}
       <div>
-        <Card className="max-h-[400px] sm:max-h-[510px]">
-          <CardHeader className="p-3 sm:p-4 lg:p-6">
-            <CardTitle className="text-base sm:text-lg">
-              Meeting Hari Ini
-            </CardTitle>
+        <Card className="max-h-[510px]">
+          <CardHeader>
+            <CardTitle>Meeting Hari Ini</CardTitle>
           </CardHeader>
           <Separator />
-          <CardContent className="overflow-y-scroll p-3 sm:p-4 lg:p-6">
+          <CardContent className="overflow-y-scroll">
             {/* Datanya */}
-            <div className="space-y-3 sm:space-y-4">
+            <div className="space-y-4">
               {upcomingMeetings.map((meeting) => (
                 <div
                   key={meeting.id}
                   className="flex items-center justify-between"
                 >
-                  <div className="flex items-center space-x-2 sm:space-x-3">
-                    <div className="h-8 w-8 sm:h-10 sm:w-10 bg-green-100 rounded-lg flex items-center justify-center">
-                      <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+                  <div className="flex items-center space-x-3">
+                    <div className="h-10 w-10 bg-green-100 rounded-lg flex items-center justify-center">
+                      <Calendar className="h-5 w-5 text-green-600" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-sm sm:text-base">
-                        {meeting.title}
-                      </h4>
-                      <div className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-muted-foreground">
-                        <Clock className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+                      <h4 className="font-medium">{meeting.title}</h4>
+                      <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                        <Clock className="h-3 w-3" />
                         <span>{meeting.time}</span>
                         <span>•</span>
-                        <Users className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+                        <Users className="h-3 w-3" />
                         <span>{meeting.participants} orang</span>
                       </div>
                     </div>
                   </div>
                   {meeting.type === "important" && (
-                    <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 bg-red-500 rounded-full"></div>
+                    <div className="h-2 w-2 bg-red-500 rounded-full"></div>
                   )}
                   {meeting.type === "monthly" && (
-                    <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 bg-red-500 rounded-full"></div>
+                    <div className="h-2 w-2 bg-red-500 rounded-full"></div>
                   )}
                 </div>
               ))}
             </div>
-            <div className="mt-4 sm:mt-6">
+            <div className="mt-6">
               <Link href={"/meetings/scheduler"}>
                 <Button
                   variant={"default"}
-                  className="w-full transition-colors cursor-pointer text-sm sm:text-base"
+                  className="w-full transition-colors cursor-pointer"
                 >
                   Lihat Calendar
                 </Button>
